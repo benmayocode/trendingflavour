@@ -15,23 +15,30 @@ L.Icon.Default.mergeOptions({
 
 const DEFAULT_POSITION = [51.52, -0.08];
 
-export default function MapView() {
+// components/MapView.js
+export default function MapView({ selectedCategory }) {
+  console.log('MapView rendered with selectedCategory:', selectedCategory);
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/api/locations')
       .then(res => res.json())
       .then(setLocations)
-      .catch(console.error);
+      .catch(err => console.error('Error fetching locations:', err));
   }, []);
 
+  const filtered = selectedCategory
+    ? locations.filter(loc => loc.category === selectedCategory)
+    : locations;
+
   return (
-    <MapContainer center={DEFAULT_POSITION} zoom={15} style={{ height: '500px', width: '100%' }}>
+    <MapContainer center={[51.52, -0.08]} zoom={15} style={{ height: '500px', width: '100%' }}>
       <TileLayer
         attribution='&copy; OpenStreetMap contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {locations.map(loc => (
+
+      {filtered.map(loc => (
         <Marker key={loc.location_id} position={[loc.latitude, loc.longitude]}>
           <Popup>
             <strong>{loc.name}</strong><br />
