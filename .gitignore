@@ -1,0 +1,4 @@
+pipelines/.env
+api/.env
+.DS_Store
+*.pyc
