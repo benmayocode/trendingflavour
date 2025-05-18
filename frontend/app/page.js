@@ -1,8 +1,12 @@
 // src/app/page.js
 'use client';
+import dynamic from 'next/dynamic';
 
 import { useEffect, useState } from 'react';
 import { Spinner, Alert } from 'react-bootstrap';
+const MapView = dynamic(() => import('./components/MapView'), {
+  ssr: false,
+});
 
 export default function HomePage() {
   const [locations, setLocations] = useState([]);
@@ -17,21 +21,11 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="container mt-4">
-      <h1>📍 TrendingFlavours</h1>
+    <div className="p-4">
+      <h3>Trending Food Spots</h3>
       {loading && <Spinner animation="border" />}
-      {!loading && locations.length === 0 && (
-        <Alert variant="info">No locations found.</Alert>
-      )}
-      {!loading && locations.length > 0 && (
-        <ul className="list-group">
-          {locations.map((loc) => (
-            <li key={loc.location_id} className="list-group-item">
-              {loc.name} — <small>{loc.category}</small>
-            </li>
-          ))}
-        </ul>
-      )}
+      {!loading && locations.length === 0 && <Alert variant="info">No locations found.</Alert>}
+      {!loading && locations.length > 0 && <MapView locations={locations} />}
     </div>
   );
 }
