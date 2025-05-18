@@ -10,7 +10,7 @@ export default function TrendingCategoriesTable({ selectedCategory, setSelectedC
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/trends/trending_categories")
+    fetch("http://127.0.0.1:8000/api/trends_cosmos/trending_categories")
       .then(res => {
         if (!res.ok) throw new Error("Failed to fetch trending categories");
         return res.json();

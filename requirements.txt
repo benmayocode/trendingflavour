@@ -2,3 +2,4 @@ flask
 python-dotenv
 psycopg2-binary
 flask_cors
+azure-cosmos==4.6.0

@@ -27,7 +27,7 @@ export default function SentimentTrendChart({ selectedCategory }) {
     useEffect(() => {
         async function fetchData() {
             try {
-                const res = await fetch('http://127.0.0.1:8000/api/trends/sentiment_over_time');
+                const res = await fetch('http://127.0.0.1:8000/api/trends_cosmos/sentiment_over_time');
                 const data = await res.json();
 
                 // Group by category

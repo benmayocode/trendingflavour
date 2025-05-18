@@ -21,7 +21,7 @@ export default function MapView({ selectedCategory }) {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/locations')
+    fetch('http://127.0.0.1:8000/api/locations_cosmos')
       .then(res => res.json())
       .then(setLocations)
       .catch(err => console.error('Error fetching locations:', err));

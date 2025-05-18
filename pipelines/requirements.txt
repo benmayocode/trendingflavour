@@ -4,3 +4,4 @@ shapely
 pyproj
 psycopg2
 openai
+scipy

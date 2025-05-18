@@ -9,12 +9,15 @@ export default function ReviewModal({ show, onHide, category }) {
   useEffect(() => {
     if (!category || !show) return;
     setLoading(true);
-    fetch(`http://127.0.0.1:8000/api/reviews/by_category?category=${category}`)
+    fetch(`http://127.0.0.1:8000/api/reviews_cosmos/by_category?category=${category}`)
       .then(res => res.json())
       .then(data => setReviews(data))
       .catch(console.error)
       .finally(() => setLoading(false));
   }, [category, show]);
+
+
+  console.log(reviews)
 
   return (
     <Modal show={show} onHide={onHide} size="lg">
