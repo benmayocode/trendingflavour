@@ -18,6 +18,7 @@ def all_locations():
     rows = [row_to_dict(cur, row) for row in cur.fetchall()]
     cur.close()
     conn.close()
+    print (f"Fetched {len(rows)} locations")
     return jsonify(rows)
 
 @bp.route("/api/locations/<location_id>")
